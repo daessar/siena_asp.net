@@ -1,0 +1,17 @@
+CREATE TABLE es_usuarios(
+usu_id int identity,
+usu_documento int primary key,
+usu_tipodoc varchar(2),
+usu_nombre varchar(30),
+usu_celular int,
+usu_email varchar(30),
+usu_genero varchar(2),
+usu_aprendiz varchar(2),
+usu_egresado varchar(2),
+usu_areaformacion varchar(40),
+usu_fechaegresado date,
+usu_direccion varchar(30),
+usu_barrio varchar(30),
+usu_ciudad varchar(30),
+usu_departamento varchar(30),
+usu_fecharegistro date)
