@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Siena.Models;
 
 namespace Siena.Controllers
 {
@@ -15,9 +16,11 @@ namespace Siena.Controllers
         }
 
         // GET: Home/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details()
         {
-            return View();
+            RegistroUsuario us = new RegistroUsuario();
+            return View(us.RecupearTodos());
+            
         }
 
         // GET: Home/Create

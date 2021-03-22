@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-success ps-5 pe-5 mb-3 d-flex flex-column flex-md-row align-items-center  border-bottom shadow-sm">
+            <div class="container-fluid d-flex">
+                <a class="navbar-brand fs-4 fw-bold">Sistema de Información De Egresados SENA</a>
+            </div>
+            <div class="d-flex flex-row-reverse bd-highlight">
+                <a class="dropdown-item">@Html.ActionLink("Buscar", "Search")</a>
+                <a class="dropdown-item">@Html.ActionLink("Registrados", "Details")</a>
+                <a class="dropdown-item">@Html.ActionLink("Registrarse", "Create")</a>
+                <a class="dropdown-item">@Html.ActionLink("Inicio", "Index")</a>
+            </div>
+        </nav>
+    </header>
+    <div>
+        @RenderBody()
+    </div>
+    <footer class="footer mt-auto p-2 bg-success">
+        <div class="container">
+            <p class="text-center">Desarrollado por Daniel 🚀</p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+</body>
+</html>
