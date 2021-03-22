@@ -10,5 +10,5 @@ Esta es una aplicación para egresados del SENA donde incorporamos varias metodo
 
 ## Vista del proyecto
 
-![Home!](Images/inicio.png)
+![Home!](Images/Inicio.png)
 ![Details!](Images/Registrados.png)
