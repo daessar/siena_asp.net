@@ -31,16 +31,16 @@ namespace Siena.Models
         public string Genero { get; set; }
 
         [Required(ErrorMessage = "La selección es obligatorio")]
-        public string Aprendiz { get; set; }
+        public bool Aprendiz { get; set; }
 
         [Required(ErrorMessage = "La selección es obligatorio")]
-        public string Egresado { get; set; }
+        public bool Egresado { get; set; }
 
         [Required(ErrorMessage = "El nombre de la formación es obligatorio")]
         [MaxLength(30, ErrorMessage = "El nombre de la formación excede el numero maximo de caracteres (30)")]
         public string AreaFormacion { get; set; }
 
-        public string FechaEgresado{ get; set; }
+        public DateTime FechaEgresado{ get; set; }
 
         [Required(ErrorMessage = "La direccion es obligatorio")]
         [MaxLength(30, ErrorMessage = "La direccion excede el numero maximo de caracteres (30)")]
@@ -58,7 +58,7 @@ namespace Siena.Models
         [MaxLength(30, ErrorMessage = "El nombre del departamento excede el numero maximo de caracteres (30)")]
         public string Departamento { get; set; }
 
-        public string FechaRegistro { get; set; }
+        public DateTime FechaRegistro { get; set; }
 
     }
 }

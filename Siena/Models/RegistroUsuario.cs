@@ -21,38 +21,7 @@ namespace Siena.Models
         public int Insertar(Usuario usr)
         {
             Conectar();
-            SqlCommand comando = new SqlCommand("INSERT INTO es_usuarios" +
-                "(usu_documento," +
-                "usu_tipodoc," +
-                "usu_nombre," +
-                "usu_celular," +
-                "usu_email," +
-                "usu_genero," +
-                "usu_aprendiz," +
-                "usu_egresado," +
-                "usu_areaformacion," +
-                "usu_fechaegresado," +
-                "usu_direccion," +
-                "usu_barrio," +
-                "usu_ciudad," +
-                "usu_departamento," +
-                "usu_fecharegistro)" +
-                "VALUES" +
-                "(@documento," +
-                "@tipodocumento," +
-                "@nombre," +
-                "@celular," +
-                "@email," +
-                "@genero," +
-                "@aprendiz," +
-                "@egresado," +
-                "@areaformacion," +
-                "@fechaegresado," +
-                "@direccion," +
-                "@barrio," +
-                "@ciudad," +
-                "@departamento," +
-                "@fecharegistro");
+            SqlCommand comando = new SqlCommand("INSERT INTO es_usuarios (usu_documento, usu_tipodoc, usu_nombre, usu_celular, usu_email, usu_genero,usu_aprendiz,usu_egresado,usu_areaformacion,usu_fechaegresado,usu_direccion,usu_barrio,usu_ciudad,usu_departamento,usu_fecharegistro)values(@documento,@tipodocumento,@nombre,@celular,@email,@genero,@aprendiz,@egresado,@areaformacion,@fechaegresado,@direccion,@barrio,@ciudad,@departamento,@fecharegistro)", con);
 
             comando.Parameters.Add("@documento", SqlDbType.Int);
             comando.Parameters.Add("@tipodocumento", SqlDbType.VarChar);
@@ -60,15 +29,15 @@ namespace Siena.Models
             comando.Parameters.Add("@celular", SqlDbType.Int);
             comando.Parameters.Add("@email", SqlDbType.VarChar);
             comando.Parameters.Add("@genero", SqlDbType.VarChar);
-            comando.Parameters.Add("@aprendiz", SqlDbType.VarChar);
-            comando.Parameters.Add("@egresado", SqlDbType.VarChar);
+            comando.Parameters.Add("@aprendiz", SqlDbType.Bit);
+            comando.Parameters.Add("@egresado", SqlDbType.Bit);
             comando.Parameters.Add("@areaformacion", SqlDbType.VarChar);
-            comando.Parameters.Add("@fechaegresado", SqlDbType.VarChar);
+            comando.Parameters.Add("@fechaegresado", SqlDbType.Date);
             comando.Parameters.Add("@direccion", SqlDbType.VarChar);
             comando.Parameters.Add("@barrio", SqlDbType.VarChar);
             comando.Parameters.Add("@ciudad", SqlDbType.VarChar);
             comando.Parameters.Add("@departamento", SqlDbType.VarChar);
-            comando.Parameters.Add("@fecharegistro", SqlDbType.VarChar);
+            comando.Parameters.Add("@fecharegistro", SqlDbType.DateTime);
 
             comando.Parameters["@documento"].Value = usr.Documento;
             comando.Parameters["@tipodocumento"].Value = usr.TipoDocumento;
@@ -84,7 +53,7 @@ namespace Siena.Models
             comando.Parameters["@barrio"].Value = usr.Barrio;
             comando.Parameters["@ciudad"].Value = usr.Ciudad;
             comando.Parameters["@departamento"].Value = usr.Departamento;
-            comando.Parameters["@fecharegistro"].Value = usr.FechaRegistro;
+            comando.Parameters["@fecharegistro"].Value = DateTime.Today;
 
             con.Open();
             int i = comando.ExecuteNonQuery();
@@ -110,15 +79,15 @@ namespace Siena.Models
                     Celular = int.Parse(registros["usu_celular"].ToString()),
                     Email = registros["usu_email"].ToString(),
                     Genero = registros["usu_genero"].ToString(),
-                    Aprendiz = registros["usu_aprendiz"].ToString(),
-                    Egresado = registros["usu_egresado"].ToString(),
+                    Aprendiz = bool.Parse(registros["usu_aprendiz"].ToString()),
+                    Egresado = bool.Parse(registros["usu_egresado"].ToString()),
                     AreaFormacion = registros["usu_areaformacion"].ToString(),
-                    FechaEgresado= registros["usu_fechaegresado"].ToString(),
+                    FechaEgresado= DateTime.Parse( registros["usu_fechaegresado"].ToString()),
                     Direccion = registros["usu_direccion"].ToString(),
                     Barrio = registros["usu_barrio"].ToString(),
                     Ciudad= registros["usu_ciudad"].ToString(),
                     Departamento = registros["usu_departamento"].ToString(),
-                    FechaRegistro = registros["usu_fechaRegistro"].ToString(),
+                    FechaRegistro = DateTime.Parse(registros["usu_fechaRegistro"].ToString()),
 
 
                 };
@@ -148,15 +117,15 @@ namespace Siena.Models
                 usuario.Celular = int.Parse(registros["documento"].ToString());
                 usuario.Email = registros["email"].ToString();
                 usuario.Genero = registros["genero"].ToString();
-                usuario.Aprendiz = registros["aprendiz"].ToString();
-                usuario.Egresado = registros["egresado"].ToString();
+                usuario.Aprendiz = bool.Parse(registros["aprendiz"].ToString());
+                usuario.Egresado = bool.Parse(registros["egresado"].ToString());
                 usuario.AreaFormacion = registros["areaFormacion"].ToString();
-                usuario.FechaEgresado = registros["fechaEgresado"].ToString();
+                usuario.FechaEgresado = DateTime.Parse(registros["usu_fechaegresado"].ToString());
                 usuario.Direccion = registros["direccion"].ToString();
                 usuario.Barrio = registros["barrio"].ToString();
                 usuario.Ciudad = registros["ciudad"].ToString();
                 usuario.Departamento = registros["departamento"].ToString();
-                usuario.FechaRegistro = registros["fechaRegistro"].ToString();
+                usuario.FechaRegistro = DateTime.Parse(registros["fechaRegistro"].ToString());
             }
             con.Close();
             return usuario;

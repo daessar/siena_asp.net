@@ -33,16 +33,29 @@ namespace Siena.Controllers
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
-            try
+            RegistroUsuario us = new RegistroUsuario();
+            Usuario usr = new Usuario
             {
-                // TODO: Add insert logic here
+                Documento = int.Parse(collection["documento"]),
+                TipoDocumento = collection["tipodocumento"],
+                Nombre = collection["nombre"],
+                Celular = int.Parse(collection["celular"]),
+                Email = collection["email"],
+                Genero = collection["genero"],
+                //Aprendiz = Boolean.Parse(collection["aprendiz"]),
+                //Egresado = Boolean.Parse(collection["egresado"]),
+                AreaFormacion = collection["areaFormacion"],
+                FechaEgresado = DateTime.Parse(collection["fechaegresado"].ToString()),
+                Direccion = collection["direccion"],
+                Barrio = collection["barrio"],
+                Ciudad = collection["ciudad"],
+                Departamento = collection["departamento"]
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            };
+            us.Insertar(usr);
+
+            return RedirectToAction("Details");
+
         }
 
         // GET: Home/Edit/5

@@ -15,6 +15,6 @@ usu_ciudad,
 usu_departamento,
 usu_fecharegistro)
 VALUES(
-2345678,'CC','Camilo',30012,'camilo@camilo.com','M','No','Si','ADSI',GETDATE(),'Cra 22 #34-50','El sol','Manizales','Caldas',GETDATE())
+2345678,'CC','Camilo',30012,'camilo@camilo.com','M',0,1,'ADSI',GETDATE(),'Cra 22 #34-50','El sol','Manizales','Caldas',GETDATE())
 
 SELECT * FROM es_usuarios
