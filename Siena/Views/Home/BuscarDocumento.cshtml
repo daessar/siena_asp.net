@@ -1,0 +1,27 @@
+﻿
+@model Siena.Models.Usuario
+@{
+    ViewBag.Title = "BuscarDocumento";
+    Layout = "~/Views/Shared/partials.cshtml";
+}
+
+<section style="min-height: 82vh;">
+    <h2 class="text text-center">Buscar Usuario</h2>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        <div class="d-flex justify-content-center text text-center">
+            <div class="-flex justify-content-center">
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Numero Documento</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre">
+                </div>
+
+                <input type="submit" class="btn btn-primary" value="Buscar" />
+            </div>
+            
+        </div>
+        }
+
+</section>
+

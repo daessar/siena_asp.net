@@ -111,5 +111,9 @@ namespace Siena.Controllers
             us.Borrar(id);
             return RedirectToAction("Details");
         }
+        public ActionResult BuscarDocumento()
+        {
+            return View();
+        }
     }
 }
