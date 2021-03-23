@@ -6,7 +6,7 @@ Esta es una aplicación para egresados del SENA donde incorporamos varias metodo
 
 - Asp.net
 - MVC
-- Sql Serve
+- Sql Server
 
 ## Vista del proyecto
 
