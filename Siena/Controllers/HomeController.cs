@@ -42,8 +42,8 @@ namespace Siena.Controllers
                 Celular = int.Parse(collection["celular"]),
                 Email = collection["email"],
                 Genero = collection["genero"],
-                //Aprendiz = Boolean.Parse(collection["aprendiz"]),
-                //Egresado = Boolean.Parse(collection["egresado"]),
+                Aprendiz = collection["aprendiz"],
+                Egresado = collection["egresado"],
                 AreaFormacion = collection["areaFormacion"],
                 FechaEgresado = DateTime.Parse(collection["fechaegresado"].ToString()),
                 Direccion = collection["direccion"],
@@ -61,45 +61,55 @@ namespace Siena.Controllers
         // GET: Home/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            RegistroUsuario us = new RegistroUsuario();
+            Usuario usr = us.Recuperar(id);
+            return View(usr);
         }
 
         // POST: Home/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
-            try
+            RegistroUsuario us = new RegistroUsuario();
+            Usuario usr = new Usuario
             {
-                // TODO: Add update logic here
+                Id = id,
+                Documento = int.Parse(collection["documento"].ToString()),
+                TipoDocumento = collection["tipodocumento"].ToString(),
+                Nombre = collection["nombre"].ToString(),
+                Celular = int.Parse(collection["celular"].ToString()),
+                Email = collection["email"].ToString(),
+                Genero = collection["genero"].ToString(),
+                Aprendiz = collection["aprendiz"].ToString(),
+                Egresado = collection["egresado"].ToString(),
+                AreaFormacion = collection["areaformacion"].ToString(),
+                FechaEgresado = DateTime.Parse(collection["fechaegresado"].ToString()),
+                Direccion = collection["direccion"].ToString(),
+                Barrio = collection["barrio"].ToString(),
+                Ciudad = collection["ciudad"].ToString(),
+                Departamento = collection["departamento"].ToString(),
+            };
+            us.Modificar(usr);
+            return RedirectToAction("Details");
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+
         }
 
         // GET: Home/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            RegistroUsuario us = new RegistroUsuario();
+            Usuario usr = us.Recuperar(id);
+            return View(usr);
         }
 
         // POST: Home/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            RegistroUsuario us = new RegistroUsuario();
+            us.Borrar(id);
+            return RedirectToAction("Details");
         }
     }
 }

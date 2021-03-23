@@ -13,24 +13,25 @@ namespace Siena.Models
     {
         private SqlConnection con;
 
-        private void Conectar()
+        private void Conectar() //Se crea una función para conectar a la base de bd
         {
             string constr = ConfigurationManager.ConnectionStrings["admin"].ToString();
             con = new SqlConnection(constr);
         }
-        public int Insertar(Usuario usr)
+        public int Insertar(Usuario usr) //Se crean los elementos
         {
             Conectar();
             SqlCommand comando = new SqlCommand("INSERT INTO es_usuarios (usu_documento, usu_tipodoc, usu_nombre, usu_celular, usu_email, usu_genero,usu_aprendiz,usu_egresado,usu_areaformacion,usu_fechaegresado,usu_direccion,usu_barrio,usu_ciudad,usu_departamento,usu_fecharegistro)values(@documento,@tipodocumento,@nombre,@celular,@email,@genero,@aprendiz,@egresado,@areaformacion,@fechaegresado,@direccion,@barrio,@ciudad,@departamento,@fecharegistro)", con);
 
+            //Especifica que tipo de datos es
             comando.Parameters.Add("@documento", SqlDbType.Int);
             comando.Parameters.Add("@tipodocumento", SqlDbType.VarChar);
             comando.Parameters.Add("@nombre", SqlDbType.VarChar);
             comando.Parameters.Add("@celular", SqlDbType.Int);
             comando.Parameters.Add("@email", SqlDbType.VarChar);
             comando.Parameters.Add("@genero", SqlDbType.VarChar);
-            comando.Parameters.Add("@aprendiz", SqlDbType.Bit);
-            comando.Parameters.Add("@egresado", SqlDbType.Bit);
+            comando.Parameters.Add("@aprendiz", SqlDbType.VarChar);
+            comando.Parameters.Add("@egresado", SqlDbType.VarChar);
             comando.Parameters.Add("@areaformacion", SqlDbType.VarChar);
             comando.Parameters.Add("@fechaegresado", SqlDbType.Date);
             comando.Parameters.Add("@direccion", SqlDbType.VarChar);
@@ -38,6 +39,8 @@ namespace Siena.Models
             comando.Parameters.Add("@ciudad", SqlDbType.VarChar);
             comando.Parameters.Add("@departamento", SqlDbType.VarChar);
             comando.Parameters.Add("@fecharegistro", SqlDbType.DateTime);
+
+            //Lee y modifica los datos
 
             comando.Parameters["@documento"].Value = usr.Documento;
             comando.Parameters["@tipodocumento"].Value = usr.TipoDocumento;
@@ -55,32 +58,33 @@ namespace Siena.Models
             comando.Parameters["@departamento"].Value = usr.Departamento;
             comando.Parameters["@fecharegistro"].Value = DateTime.Today;
 
-            con.Open();
-            int i = comando.ExecuteNonQuery();
-            con.Close();
-            return i;
+            con.Open(); //Abre la conexion
+            int i = comando.ExecuteNonQuery(); //Devuelve el numero de filas afectadas
+            con.Close(); //Cierra la conexion
+            return i; //Retornas cuantas filas se afectaron
         }
         public List<Usuario> RecupearTodos()
         {
             Conectar();
-            List<Usuario> usuario = new List<Usuario>();
+            List<Usuario> usuario = new List<Usuario>(); //Trae todos los datos que estan en la bd
 
-            SqlCommand com = new SqlCommand("SELECT usu_documento,usu_tipodoc,usu_nombre,usu_celular,usu_email,usu_genero,usu_aprendiz,usu_egresado,usu_areaformacion,usu_fechaegresado,usu_direccion,usu_barrio,usu_ciudad,usu_departamento,usu_fecharegistro FROM es_usuarios ORDER BY usu_nombre ASC", con);
+            SqlCommand com = new SqlCommand("SELECT usu_id,usu_documento,usu_tipodoc,usu_nombre,usu_celular,usu_email,usu_genero,usu_aprendiz,usu_egresado,usu_areaformacion,usu_fechaegresado,usu_direccion,usu_barrio,usu_ciudad,usu_departamento,usu_fecharegistro FROM es_usuarios ORDER BY usu_nombre ASC", con);
             con.Open();
             SqlDataReader registros = com.ExecuteReader();
 
-            while (registros.Read())
+            while (registros.Read()) //Se muestran los campos por filas, uno por uno 
             {
                 Usuario usr = new Usuario
                 {
+                    Id = int.Parse(registros["usu_id"].ToString()),
                     Documento = int.Parse(registros["usu_documento"].ToString()),
                     TipoDocumento = registros["usu_tipodoc"].ToString(),
                     Nombre = registros["usu_nombre"].ToString(),
                     Celular = int.Parse(registros["usu_celular"].ToString()),
                     Email = registros["usu_email"].ToString(),
                     Genero = registros["usu_genero"].ToString(),
-                    Aprendiz = bool.Parse(registros["usu_aprendiz"].ToString()),
-                    Egresado = bool.Parse(registros["usu_egresado"].ToString()),
+                    Aprendiz = registros["usu_aprendiz"].ToString(),
+                    Egresado = registros["usu_egresado"].ToString(),
                     AreaFormacion = registros["usu_areaformacion"].ToString(),
                     FechaEgresado= DateTime.Parse( registros["usu_fechaegresado"].ToString()),
                     Direccion = registros["usu_direccion"].ToString(),
@@ -97,35 +101,36 @@ namespace Siena.Models
             con.Close();
             return usuario;
         }
-        public Usuario Recuperar(int documento)
+        public Usuario Recuperar(int id)
         {
             Conectar();
-            SqlCommand comando = new SqlCommand("SELECT usu_documento,usu_tipodoc,usu_nombre,usu_celular,usu_email,usu_genero,usu_aprendiz,usu_egresado,usu_areaformacion,usu_fechaegresado,usu_direccionusu_barrio,usu_ciudad,usu_departamento,usu_fecharegistro FROM Usuarios WHERE documento=@documento", con);
+            SqlCommand comando = new SqlCommand("SELECT usu_id,usu_documento,usu_tipodoc,usu_nombre,usu_celular,usu_email,usu_genero,usu_aprendiz,usu_egresado,usu_areaformacion,usu_fechaegresado,usu_direccion,usu_barrio,usu_ciudad,usu_departamento,usu_fecharegistro FROM es_usuarios WHERE usu_id=@id", con);
 
-            comando.Parameters.Add("@documento", SqlDbType.Int);
-            comando.Parameters["@documento"].Value = documento;
+            comando.Parameters.Add("@id", SqlDbType.Int);
+            comando.Parameters["@id"].Value = id;
 
             con.Open();
-            SqlDataReader registros = comando.ExecuteReader();
+            SqlDataReader registros = comando.ExecuteReader(); //Trae las lineas que se guardaron o afectaron y ejecuta la sentencia
             Usuario usuario = new Usuario();
 
+            //Trae la informacion de la base de datos para pasarla al controlador y despues el controlador los envia a la vista.
             if (registros.Read())
             {
-                usuario.Documento = int.Parse(registros["codigo"].ToString());
-                usuario.TipoDocumento = registros["tipoDocumento"].ToString();
-                usuario.Nombre = registros["nombre"].ToString();
-                usuario.Celular = int.Parse(registros["documento"].ToString());
-                usuario.Email = registros["email"].ToString();
-                usuario.Genero = registros["genero"].ToString();
-                usuario.Aprendiz = bool.Parse(registros["aprendiz"].ToString());
-                usuario.Egresado = bool.Parse(registros["egresado"].ToString());
-                usuario.AreaFormacion = registros["areaFormacion"].ToString();
+                usuario.Id = int.Parse(registros["usu_id"].ToString());
+                usuario.Documento = int.Parse(registros["usu_documento"].ToString());
+                usuario.TipoDocumento = registros["usu_tipodoc"].ToString();
+                usuario.Nombre = registros["usu_nombre"].ToString();
+                usuario.Celular = int.Parse(registros["usu_celular"].ToString());
+                usuario.Email = registros["usu_email"].ToString();
+                usuario.Genero = registros["usu_genero"].ToString();
+                usuario.Aprendiz = registros["usu_aprendiz"].ToString();
+                usuario.Egresado =  registros["usu_egresado"].ToString();
+                usuario.AreaFormacion = registros["usu_areaFormacion"].ToString();
                 usuario.FechaEgresado = DateTime.Parse(registros["usu_fechaegresado"].ToString());
-                usuario.Direccion = registros["direccion"].ToString();
-                usuario.Barrio = registros["barrio"].ToString();
-                usuario.Ciudad = registros["ciudad"].ToString();
-                usuario.Departamento = registros["departamento"].ToString();
-                usuario.FechaRegistro = DateTime.Parse(registros["fechaRegistro"].ToString());
+                usuario.Direccion = registros["usu_direccion"].ToString();
+                usuario.Barrio = registros["usu_barrio"].ToString();
+                usuario.Ciudad = registros["usu_ciudad"].ToString();
+                usuario.Departamento = registros["usu_departamento"].ToString();
             }
             con.Close();
             return usuario;
@@ -133,7 +138,9 @@ namespace Siena.Models
         public int Modificar(Usuario usr)
         {
             Conectar();
-            SqlCommand comando = new SqlCommand("UPDATE es_usuarios set tipoDocumento=@tipodocumento,nombre=@nombre,celular=@celular,email=@email,genero=@genero,aprendiz=@aprendiz,egresado=@egresado,areaFormacion=@areaformacion,fechaEgresado=@fechaegresado,direccion=@direccion,barrio=@barrio,ciudad=@ciudad,departamento=@departamento,fechaRegistro=@fecharegistro WHERE documento=@documento", con);
+            SqlCommand comando = new SqlCommand("UPDATE es_usuarios set usu_tipodoc=@tipodocumento,usu_nombre=@nombre,usu_celular=@celular,usu_email=@email,usu_genero=@genero,usu_aprendiz=@aprendiz,usu_egresado=@egresado,usu_areaformacion=@areaformacion,usu_fechaegresado=@fechaegresado,usu_direccion=@direccion,usu_barrio=@barrio,usu_ciudad=@ciudad,usu_departamento=@departamento,usu_fecharegistro=@fecharegistro WHERE usu_id=@id", con);
+            //Muestra la información
+            comando.Parameters.Add("@id", SqlDbType.Int);
             comando.Parameters.Add("@documento", SqlDbType.Int);
             comando.Parameters.Add("@tipodocumento", SqlDbType.VarChar);
             comando.Parameters.Add("@nombre", SqlDbType.VarChar);
@@ -143,13 +150,14 @@ namespace Siena.Models
             comando.Parameters.Add("@aprendiz", SqlDbType.VarChar);
             comando.Parameters.Add("@egresado", SqlDbType.VarChar);
             comando.Parameters.Add("@areaformacion", SqlDbType.VarChar);
-            comando.Parameters.Add("@fechaegresado", SqlDbType.VarChar);
+            comando.Parameters.Add("@fechaegresado", SqlDbType.DateTime);
             comando.Parameters.Add("@direccion", SqlDbType.VarChar);
             comando.Parameters.Add("@barrio", SqlDbType.VarChar);
             comando.Parameters.Add("@ciudad", SqlDbType.VarChar);
             comando.Parameters.Add("@departamento", SqlDbType.VarChar);
-            comando.Parameters.Add("@fecharegistro", SqlDbType.VarChar);
+            comando.Parameters.Add("@fecharegistro", SqlDbType.DateTime);
 
+            comando.Parameters["@id"].Value = usr.Id;
             comando.Parameters["@documento"].Value = usr.Documento;
             comando.Parameters["@tipodocumento"].Value = usr.TipoDocumento;
             comando.Parameters["@nombre"].Value = usr.Nombre;
@@ -164,19 +172,19 @@ namespace Siena.Models
             comando.Parameters["@barrio"].Value = usr.Barrio;
             comando.Parameters["@ciudad"].Value = usr.Ciudad;
             comando.Parameters["@departamento"].Value = usr.Departamento;
-            comando.Parameters["@fecharegistro"].Value = usr.FechaRegistro;
+            comando.Parameters["@fecharegistro"].Value = DateTime.Now;
 
             con.Open();
             int i = comando.ExecuteNonQuery();
             con.Close();
             return i;
         }
-        public int Borrar(int documento)
+        public int Borrar(int id)
         {
             Conectar();
-            SqlCommand comando = new SqlCommand("DELETE FROM es_usuarios WHERE documento=@documento", con);
-            comando.Parameters.Add("@documento", SqlDbType.Int);
-            comando.Parameters["@documento"].Value = documento;
+            SqlCommand comando = new SqlCommand("DELETE FROM es_usuarios WHERE usu_id=@id", con);
+            comando.Parameters.Add("@id", SqlDbType.Int);
+            comando.Parameters["@id"].Value = id;
             con.Open();
             int i = comando.ExecuteNonQuery();
             con.Close();

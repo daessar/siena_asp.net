@@ -1,0 +1,102 @@
+﻿
+@model Siena.Models.Usuario
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/partials.cshtml";
+}
+
+<section style="min-height: 82vh;">
+    <h2 class="text text-center">Crear Usuario</h2>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+<div class="d-flex justify-content-center text text-center">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+    <div class="-flex justify-content-center">
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label mb-2" })
+            @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Documento, htmlAttributes: new { @class = "control-label mb-2" })
+            @Html.EditorFor(model => model.Documento, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Documento, "", new { @class = "text-danger" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(model => model.TipoDocumento, htmlAttributes: new { @class = "control-label mb-2" })
+            @Html.EditorFor(model => model.TipoDocumento, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TipoDocumento, "", new { @class = "text-danger" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label mb-2" })
+            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Celular, htmlAttributes: new { @class = "control-label mb-2" })
+            @Html.EditorFor(model => model.Celular, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Celular, "", new { @class = "text-danger" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label mb-2" })
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Genero, htmlAttributes: new { @class = "control-label mb-2" })
+            @Html.EditorFor(model => model.Genero, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Genero, "", new { @class = "text-danger" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Aprendiz, htmlAttributes: new { @class = "form-check-label mb-2" })
+            @Html.EditorFor(model => model.Aprendiz, new { htmlAttributes = new { @class = "form-check-input" } })
+            @Html.ValidationMessageFor(model => model.Aprendiz, "", new { @class = "text-danger" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Egresado, htmlAttributes: new { @class = "form-check-label mb-2" })
+            @Html.EditorFor(model => model.Egresado, new { htmlAttributes = new { @class = "form-check-input" } })
+            @Html.ValidationMessageFor(model => model.Egresado, "", new { @class = "text-danger" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(model => model.AreaFormacion, htmlAttributes: new { @class = "control-label mb-2" })
+            @Html.EditorFor(model => model.AreaFormacion, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.AreaFormacion, "", new { @class = "text-danger" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(model => model.FechaEgresado, htmlAttributes: new { @class = "control-label mb-2" })
+            @Html.EditorFor(model => model.FechaEgresado, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.FechaEgresado, "", new { @class = "text-danger" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Direccion, htmlAttributes: new { @class = "control-label mb-2" })
+            @Html.EditorFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Barrio, htmlAttributes: new { @class = "control-label mb-2" })
+            @Html.EditorFor(model => model.Barrio, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Barrio, "", new { @class = "text-danger" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Ciudad, htmlAttributes: new { @class = "control-label mb-2" })
+            @Html.EditorFor(model => model.Ciudad, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Ciudad, "", new { @class = "text-danger" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Departamento, htmlAttributes: new { @class = "control-label mb-2" })
+            @Html.EditorFor(model => model.Departamento, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Departamento, "", new { @class = "text-danger" })
+        </div>
+
+        <input type="submit" value="Crear" class="btn btn-success mb-4" />
+    </div>
+</div>
+    }
+</section>
+
+
+

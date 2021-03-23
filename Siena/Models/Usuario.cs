@@ -8,6 +8,8 @@ namespace Siena.Models
 {
     public class Usuario
     {
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "El numero de documento es obligatorio")]
         [MaxLength(10, ErrorMessage = "El numero de documento excede el numero maximo de caracteres (10)")]
         public int Documento { get; set; }
@@ -31,10 +33,10 @@ namespace Siena.Models
         public string Genero { get; set; }
 
         [Required(ErrorMessage = "La selección es obligatorio")]
-        public bool Aprendiz { get; set; }
+        public string Aprendiz { get; set; }
 
         [Required(ErrorMessage = "La selección es obligatorio")]
-        public bool Egresado { get; set; }
+        public string Egresado { get; set; }
 
         [Required(ErrorMessage = "El nombre de la formación es obligatorio")]
         [MaxLength(30, ErrorMessage = "El nombre de la formación excede el numero maximo de caracteres (30)")]

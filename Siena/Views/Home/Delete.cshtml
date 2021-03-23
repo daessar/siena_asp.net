@@ -1,0 +1,133 @@
+﻿
+@model Siena.Models.Usuario
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/partials.cshtml";
+}
+<section style="min-height: 82vh;">
+    <h2 class="text text-center">Eliminar Usuario</h2>
+    <hr />
+    <div class="d-flex text text-center">
+        <div class="d-flex justify-content-center">
+            <div class="ms-3 me-2">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="submit" value="Eliminar" class="btn btn-danger" />
+                }
+            </div>
+            <div class="mb-3 me-2">
+                <div class="control-label mb-2 fw-bolder">
+                    @Html.DisplayNameFor(model => model.Documento)
+                </div>
+                <div class="control-label mb-2">
+                    @Html.DisplayFor(model => model.Documento)
+                </div>
+            </div>
+            <div class="mb-3 me-2">
+                <div class="control-label mb-2 fw-bolder">
+                    @Html.DisplayNameFor(model => model.TipoDocumento)
+                </div>
+                <div class="control-label mb-2">
+                    @Html.DisplayFor(model => model.TipoDocumento)
+                </div>
+            </div>
+            <div class="mb-3 me-2">
+                <div class="control-label mb-2 fw-bolder">
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </div>
+                <div class="control-label mb-2">
+                    @Html.DisplayFor(model => model.Nombre)
+                </div>
+            </div>
+            <div class="mb-3 me-2">
+                <div class="control-label mb-2 fw-bolder">
+                    @Html.DisplayNameFor(model => model.Celular)
+                </div>
+                <div class="control-label mb-2">
+                    @Html.DisplayFor(model => model.Celular)
+                </div>
+            </div>
+            <div class="mb-3 me-2">
+                <div class="control-label mb-2 fw-bolder">
+                    @Html.DisplayNameFor(model => model.Email)
+                </div>
+                <div class="control-label mb-2">
+                    @Html.DisplayFor(model => model.Email)
+                </div>
+            </div>
+            <div class="mb-3 me-2">
+                <div class="control-label mb-2 fw-bolder">
+                    @Html.DisplayNameFor(model => model.Genero)
+                </div>
+                <div class="control-label mb-2">
+                    @Html.DisplayFor(model => model.Genero)
+                </div>
+            </div>
+            <div class="mb-3 me-2">
+                <div class="control-label mb-2 fw-bolder">
+                    @Html.DisplayNameFor(model => model.Aprendiz)
+                </div>
+                <div class="control-label mb-2">
+                    @Html.DisplayFor(model => model.Aprendiz)
+                </div>
+            </div>
+            <div class="mb-3 me-2">
+                <div class="control-label mb-2 fw-bolder">
+                    @Html.DisplayNameFor(model => model.Egresado)
+                </div>
+                <div class="control-label mb-2">
+                    @Html.DisplayFor(model => model.Egresado)
+                </div>
+            </div>
+            <div class="mb-3 me-2">
+                <div class="control-label mb-2 fw-bolder">
+                    @Html.DisplayNameFor(model => model.AreaFormacion)
+                </div>
+                <div class="control-label mb-2">
+                    @Html.DisplayFor(model => model.AreaFormacion)
+                </div>
+            </div>
+            <div class="mb-3 me-2">
+                <div class="control-label mb-2 fw-bolder">
+                    @Html.DisplayNameFor(model => model.FechaEgresado)
+                </div>
+                <div class="control-label mb-2">
+                    @Html.DisplayFor(model => model.FechaEgresado)
+                </div>
+            </div>
+            <div class="mb-3 me-2">
+                <div class="control-label mb-2 fw-bolder">
+                    @Html.DisplayNameFor(model => model.Direccion)
+                </div>
+                <div class="control-label mb-2">
+                    @Html.DisplayFor(model => model.Direccion)
+                </div>
+            </div>
+            <div class="mb-3 me-2">
+                <div class="control-label mb-2 fw-bolder">
+                    @Html.DisplayNameFor(model => model.Barrio)
+                </div>
+                <div class="control-label mb-2">
+                    @Html.DisplayFor(model => model.Barrio)
+                </div>
+            </div>
+            <div class="mb-3 me-2">
+                <div class="control-label mb-2 fw-bolder">
+                    @Html.DisplayNameFor(model => model.Ciudad)
+                </div>
+                <div class="control-label mb-2">
+                    @Html.DisplayFor(model => model.Ciudad)
+                </div>
+            </div>
+            <div class="mb-3 me-2">
+                <div class="control-label mb-2 fw-bolder">
+                    @Html.DisplayNameFor(model => model.Departamento)
+                </div>
+                <div class="control-label mb-2">
+                    @Html.DisplayFor(model => model.Departamento)
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
